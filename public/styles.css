@@ -1,0 +1,72 @@
+.neoInputArea {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    font-family: 'Helvetica Neue',Helvetica,sans-serif;
+    font-weight: 400;
+    font-size: 0.875em;
+    line-height: 1.71429;
+    background: #242730;
+    color: #A0A7B4;
+}
+
+.neoInputArea h2{
+    color: #1FBAD6;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 1.17px;
+}
+
+.neoInputArea label{
+    color: #A0A7B4;
+}
+
+.neoInputArea .shortTextInput{
+    float: left;
+    padding: 10px;
+}
+
+.neoInputArea .longTextInput{
+    float: right;
+}
+
+.neoInputArea input[type="text"], textarea{
+    border-style: solid;
+    /*border: 1px solid #cccccc;
+    background: #29323C;*/
+    background-color: #29323C;
+    border: 1px solid #29323C;
+    border-radius: 2px;
+    color: #6A7485;
+}
+
+.neoInputArea textarea{
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    width: 100%;
+}
+
+.select-data-types{
+    text-align: center;
+    margin: auto;
+}
+
+.select-data-types .btn{
+    font-size: 0.4rem;
+    margin: 0 0.3rem;
+    padding: 0.01rem;
+} 
+
+.neoInputArea select{
+    padding-left: 4px 10px;
+    background-color: #29323C;
+    border: 1px solid #29323C;
+    border-radius: 2px;
+    /*background: #3A414C;*/
+    color: #99A0AC;
+}
+
+.neoInputArea option:hover, .neoInputArea option:focus, .neoInputArea option:checked, .neoInputArea option:active{
+    background: #99A0AC;
+    color: #E9EAEB;
+}
