@@ -6,42 +6,94 @@ const username = 'neo4j';
 const password = 'pass';
 
 var driver = neo4j.driver(
-    neoRoute,
-    neo4j.auth.basic(username, password)
+  neoRoute,
+  neo4j.auth.basic(username, password)
 );
 
 
 var session = driver.session({
-    // database: "CanCities"
+  // database: "CanCities"
 });
 
-function login(route, username, password){
-  if(driver){
+function login(route, username, password) {
+  if (driver) {
     driver.close();
     alert("Closed driver!");
   }
-  driver = neo4j.driver(
-    route,
-    neo4j.auth.basic(username, password)
-  );
-  session = driver.session();
-  alert("Completed login.");
+
+  //let result = {};
+    try{
+    driver = neo4j.driver(
+      route,
+      neo4j.auth.basic(username, password)
+    );} catch(err){
+      alert("Caught error");
+      return new Error(err.message);
+    }
+    
+    function disp (obj){
+      alert("DISP: " + JSON.stringify(obj));
+      return {
+        type: "success",
+        code: "login"
+      }
+    }
+
+    function errHandle(obj){
+      return {
+        type: "error",
+        code: obj.code
+      }
+    }
+
+    session = driver.session();
+    return driver.verifyConnectivity().then(disp).catch(errHandle);
+    //TODO: Decide if we want:
+    // - Custom Resolver
+    // - Encryption (default: none)
+    // - MaxConnectionLifetime (default: 1 hr)
+    
+    //alert("end");
+    
+    //This is a sample query to test if the login was successful
+    //TODO: Figure out a better way of confirming this.
+    // return session.run("MATCH (n:fakeQUERY) RETURN n", {})
+    // .then(result =>{
+    //   return "Success!";
+    // })
+    // .catch(error =>{
+    //   alert("err!!!");
+    //   return error.message;
+    //   //throw new Error (error.message);
+    // });
+    // .then(result => {
+    //   try {
+    //     if(!result)
+    //       alert("empty result");
+    //   } catch (err) {
+    //     throw new Error("error parsing records: " + err.message)
+    //   }
+    // })
+    // .catch(error =>{
+    //   alert("err");
+    //   //throw new Error (error.message);
+    // });
 }
 
-function performQuery(query, dataFields){
+function performQuery(query, dataFields) {
 
   return session
-    .run(query, 
+    .run(query,
       {
         //Parameters would go here
       })
     .then(result => {
-      try{
-      let queryResult = parseRecords(result.records, dataFields);
-      //alert("Query Results: \n" + JSON.stringify(queryResult));
-      return queryResult;
-      } catch(err){
-      throw new Error("error parsing records: " + err.message)
+      try {
+        let queryResult = parseRecords(result.records, dataFields);
+        //alert("Query Results: \n" + JSON.stringify(queryResult));
+        return queryResult;
+      } catch (err) {
+        throw new Error("error parsing records: " + err.message)
       }
 
       //TODO: Remove these console logs
@@ -61,34 +113,34 @@ function performQuery(query, dataFields){
     })
 }
 
-function parseRecords(records, dataFields){
-    let firstRecord = records[0];
-    if(!firstRecord){
-        throw new Error('No records detected');
-    }
-    for(let i = 0; i<dataFields.length ; i++)
-        dataFields[i].name = firstRecord.keys[i];
-    
-    // console.log("======= The Data Fields Are ======");
-    // console.log(dataFields);
+function parseRecords(records, dataFields) {
+  let firstRecord = records[0];
+  if (!firstRecord) {
+    throw new Error('No records detected');
+  }
+  for (let i = 0; i < dataFields.length; i++)
+    dataFields[i].name = firstRecord.keys[i];
 
-    //TODO: Add better type validation?
-    let dataRows = [];
-    records.forEach(record =>{
-        let myData = [];
-        record._fields.forEach(field =>{
-            if(neo4j.isInt(field))
-                field = neo4j.integer.toNumber(field);
-            myData.push(field);
-        });
-        dataRows.push(myData);
-    })
-    // console.log("========= The completed data is ===========");
-    // console.log(dataRows);
-    return {
-      fields: dataFields,
-      rows: dataRows
-    };
+  // console.log("======= The Data Fields Are ======");
+  // console.log(dataFields);
+
+  //TODO: Add better type validation?
+  let dataRows = [];
+  records.forEach(record => {
+    let myData = [];
+    record._fields.forEach(field => {
+      if (neo4j.isInt(field))
+        field = neo4j.integer.toNumber(field);
+      myData.push(field);
+    });
+    dataRows.push(myData);
+  })
+  // console.log("========= The completed data is ===========");
+  // console.log(dataRows);
+  return {
+    fields: dataFields,
+    rows: dataRows
+  };
 }
 
 export default performQuery;

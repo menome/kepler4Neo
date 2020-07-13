@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 //JSX Components
-import NeoInput2 from "./NeoInput2";
+import NeoDisplay from "./NeoDisplay";
 import MapData from "./MapData";
 
 
@@ -16,7 +16,7 @@ function NeoApp(){
     }
 
     return <div>
-        <NeoInput2 setUpload={updateUpload}/>
+        <NeoDisplay setUpload={updateUpload}/>
         <MapData mapInfo={upload} />
     </div>
 }

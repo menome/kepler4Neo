@@ -21,7 +21,7 @@ function SelectMultiple(props) {
                     <option value="geojson">GeoJson String / WKT String</option>
                     <option value="timestamp">Timestamp</option>
                 </select>
-                <button type='button' value='remove' className="btn btn-outline-danger" onClick={(e) => { removeSelectBar(i) }}>
+                <button type='button' value='remove' className="select-data-remove" onClick={(e) => { removeSelectBar(i) }}>
                     <MDIcon icon="delete"></MDIcon>
                 </button>
             </div>
@@ -56,15 +56,16 @@ function SelectMultiple(props) {
     }
 
     return (
+        <div>
+        <h3>Select your data types:</h3>
         <div className="select-data-types">
-            <label>Specify Data Types
                 <div>
                     {createUI()}
                 </div>
-            </label>
-            <button type="button" className="btn btn-outline-info" onClick={addSelectBar}>
+            <button type="button" className="select-data-add" onClick={addSelectBar}>
                 <MDIcon icon="add_circle"></MDIcon>
             </button>
+        </div>
         </div>
     )
 }

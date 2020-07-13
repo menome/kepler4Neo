@@ -7,9 +7,9 @@ import NeoApp from "./NeoApp.jsx";
 import store from "./store";
 
 export default function App(){
-    return <Provider store={store}> 
+    return <div><Provider store={store}> 
     <Map />
     <NeoApp/>
-    </Provider>
+    </Provider></div>
 }
 

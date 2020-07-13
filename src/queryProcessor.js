@@ -7,17 +7,13 @@ async function processQuery(input) {
     let id = input.id;
     let name = input.name;
 
-    try {
-        validateInput(query, id, name, dataTypes);
-    } catch (err) {
-        throw new Error("Invalid input - " + err.message);
-    }
+    validateInput(query, id, name, dataTypes);
 
     let dataFields = await generateDataFields(dataTypes);
 
     return submitQuery(query, dataFields).then(queryResult => {
         if (!queryResult) {
-            throw new Error("Your query did not return a response from Neo4J. Check your query for typos.");
+            throw new Error("noRes");
         }
 
         var mapInfo = {
@@ -28,9 +24,8 @@ async function processQuery(input) {
         }
         return mapInfo;
     }).catch(error => {
-        throw new Error("Error submitting Neo4J Query - " + error.message);
+        throw new Error(error.message);
     });
-
 
 }
 
@@ -45,16 +40,16 @@ function generateDataFields(dataTypes) {
 
 function validateInput(query, id, name, dataTypes) {
     if (!query) {
-        throw new Error("Cannot have blank query");
+        throw new Error("blankQuery");
     }
     if (!id) {
-        throw new Error("Cannot have blank ID");
+        throw new Error("blankId");
     }
     if (!name) {
-        throw new Error("Cannot have blank name");
+        throw new Error("blankName");
     }
     if (!dataTypes || dataTypes.length === 0) {
-        throw new Error("No return data types specified");
+        throw new Error("blankReturn");
     }
 }
 
@@ -64,3 +59,12 @@ function validateInput(query, id, name, dataTypes) {
 
 
 export default processQuery;
+
+
+
+/**
+ * Logs into the database, returning an object that represents what type of 
+ * @param {string} route - The URI route of the database to connect to
+ * @param {string} username - The username to connect with 
+ * @param {string} password - the password to connect with
+ */
