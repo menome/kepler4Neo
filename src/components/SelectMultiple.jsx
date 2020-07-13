@@ -11,7 +11,7 @@ function SelectMultiple(props) {
         if (!props.values)
             return;
         return props.values.map((val, i) =>
-            <div key={i}>
+            <div className="select-type-bar" key={i}>
                 <select value={val || defaultSelect} onChange={(e) => { handleSelectChange(e, i) }} >
                     <option value="real">Real Number</option>
                     <option value="date">Date</option>
@@ -22,14 +22,13 @@ function SelectMultiple(props) {
                     <option value="timestamp">Timestamp</option>
                 </select>
                 <button type='button' value='remove' className="select-data-remove" onClick={(e) => { removeSelectBar(i) }}>
-                    <MDIcon icon="delete"></MDIcon>
+                    X
                 </button>
             </div>
         )
     }
 
     function handleSelectChange(event, i) {
-        //alert("handle change!");
         let val = event.target.value;
         let temp = props.values;
         temp[i] = val;
@@ -37,14 +36,12 @@ function SelectMultiple(props) {
     }
 
     function removeSelectBar(i) {
-        //alert("remove select!");
         let selectValues = props.values;
         selectValues.splice(i, 1);
         props.setValues([...selectValues]);
     }
 
     function addSelectBar() {
-        //alert("add select!");
         let temp = props.values;
         if (!temp) {
             props.setValues([defaultSelect]);
@@ -63,7 +60,7 @@ function SelectMultiple(props) {
                     {createUI()}
                 </div>
             <button type="button" className="select-data-add" onClick={addSelectBar}>
-                <MDIcon icon="add_circle"></MDIcon>
+                + Add more data 
             </button>
         </div>
         </div>
@@ -71,3 +68,6 @@ function SelectMultiple(props) {
 }
 
 export default SelectMultiple
+
+/*<MDIcon icon="add_circle"></MDIcon>*/
+/*<MDIcon icon="delete"></MDIcon>*/
