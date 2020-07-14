@@ -1,15 +1,19 @@
 var neo4j = require('neo4j-driver');
 
 // Local Login Info
-const neoRoute = 'bolt://localhost:7687';
-const username = 'neo4j';
-const password = 'pass';
+
+const neoRoute = 'bolt://54.82.3.194:38717';
+const startUsername = 'neo4j';
+const startPassword = 'pump-warehouses-ax';
+
+// const neoRoute = 'bolt://localhost:7687';
+// const startUsername = 'neo4j';
+// const startPassword = 'pass';
 
 var driver = neo4j.driver(
   neoRoute,
-  neo4j.auth.basic(username, password)
+  neo4j.auth.basic(startUsername, startPassword)
 );
-
 
 var session = driver.session({
   // database: "CanCities"
@@ -18,7 +22,6 @@ var session = driver.session({
 function login(route, username, password) {
   if (driver) {
     driver.close();
-    alert("Closed driver!");
   }
 
   //let result = {};
@@ -104,8 +107,18 @@ function parseRecords(records, dataFields) {
   records.forEach(record => {
     let myData = [];
     record._fields.forEach(field => {
-      if (neo4j.isInt(field))
+      if (neo4j.isInt(field)){
         field = neo4j.integer.toNumber(field);
+      } else if (neo4j.isDate(field)){
+        field = field.year + "/" + field.month + "/" + field.day;
+      } else if(neo4j.isDateTime(field)){
+        field = field.toString();
+        console.log(field);
+      }
+      // else if(neo4j.isDate)
+      //   field = field.toString();
+      // else if(neo4j.isDateTime)
+      //   field = field.toString();
       myData.push(field);
     });
     dataRows.push(myData);

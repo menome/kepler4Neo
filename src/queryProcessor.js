@@ -57,6 +57,9 @@ function validateInput(query, id, name, dataTypes) {
 // MATCH (c:City)-[:IS_IN]->(:Province {name:"Alberta"}) RETURN c.name as cityName, c.population AS population, c.latitude AS latitude, c.longitude AS longitude
 // MATCH (p:Province)-[:NEXT_TO]-(:Province {name:"Alberta"}) MATCH (c:City)-[:IS_IN]->(p) RETURN c.name as cityName, c.population AS population, c.latitude AS latitude, c.longitude AS longitude
 
+// MATCH (l:Place) RETURN l.id AS id, l.name AS name, l.homelocation.x AS latitude, l.homelocation.y AS longitude, size((:Visit)-[:LOCATED_AT]->(l)) AS numberVisits
+// MATCH (v:Visit)-[:LOCATED_AT]->(l:Place) RETURN l.id AS id, l.name AS name, l.homelocation.x AS latitude, l.homelocation.y AS longitude, date(v.starttime) AS startime
+
 
 export default processQuery;
 
