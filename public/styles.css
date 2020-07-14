@@ -217,11 +217,11 @@ body{
     display: grid;
     grid-gap: 3px;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto 55px auto;
+    grid-template-rows: auto auto 55px;
     grid-template-areas: 
     ". . . i i l l l l . . ."
-    ". . . c c c c c c . . ."
-    ". . m m m m m m m m . .";
+    ". . m m m m m m m m . ."
+    ". . . c c c c c c . . .";
 }
 
 .neoInputArea .db-UI .db-img{

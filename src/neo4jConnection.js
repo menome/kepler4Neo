@@ -19,7 +19,7 @@ var session = driver.session({
   // database: "CanCities"
 });
 
-function login(route, username, password) {
+async function login(route, username, password) {
   if (driver) {
     driver.close();
   }
@@ -30,12 +30,11 @@ function login(route, username, password) {
       route,
       neo4j.auth.basic(username, password)
     );} catch(err){
-      return new Error(err.message);
+      throw new Error(err.message);
     }
     
     // Case: Login was successful
     function disp (obj){
-      //alert("DISP: " + JSON.stringify(obj));
       return {
         type: "success",
         code: "login"
@@ -68,7 +67,6 @@ function performQuery(query, dataFields) {
     .then(result => {
       try {
         let queryResult = parseRecords(result.records, dataFields);
-        //alert("Query Results: \n" + JSON.stringify(queryResult));
         return queryResult;
       } catch (err) {
         throw new Error("error parsing records: " + err.message)
