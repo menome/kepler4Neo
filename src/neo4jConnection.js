@@ -27,18 +27,19 @@ function login(route, username, password) {
       route,
       neo4j.auth.basic(username, password)
     );} catch(err){
-      alert("Caught error");
       return new Error(err.message);
     }
     
+    // Case: Login was successful
     function disp (obj){
-      alert("DISP: " + JSON.stringify(obj));
+      //alert("DISP: " + JSON.stringify(obj));
       return {
         type: "success",
         code: "login"
       }
     }
 
+    //Case: login was unsuccessful
     function errHandle(obj){
       return {
         type: "error",
@@ -52,32 +53,6 @@ function login(route, username, password) {
     // - Custom Resolver
     // - Encryption (default: none)
     // - MaxConnectionLifetime (default: 1 hr)
-    
-    //alert("end");
-    
-    //This is a sample query to test if the login was successful
-    //TODO: Figure out a better way of confirming this.
-    // return session.run("MATCH (n:fakeQUERY) RETURN n", {})
-    // .then(result =>{
-    //   return "Success!";
-    // })
-    // .catch(error =>{
-    //   alert("err!!!");
-    //   return error.message;
-    //   //throw new Error (error.message);
-    // });
-    // .then(result => {
-    //   try {
-    //     if(!result)
-    //       alert("empty result");
-    //   } catch (err) {
-    //     throw new Error("error parsing records: " + err.message)
-    //   }
-    // })
-    // .catch(error =>{
-    //   alert("err");
-    //   //throw new Error (error.message);
-    // });
 }
 
 function performQuery(query, dataFields) {
