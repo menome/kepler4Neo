@@ -24,6 +24,7 @@ Send a cypher query to your current Neo4J database
 4. Insert your mapbox API token into your .env file using the name REACT_APP_MAPBOX_API_TOKEN.
 
 `REACT_APP_MAPBOX_API_TOKEN=<YourToken>`
+
 5. To launch kepler4Neo, navigate to the kepler4Neo folder and type `npm start` with a command terminal.
 
 You can input default credentials to automatically log in to a specific database whenever the app is launched. To do this, simply change the values of neoRoute, startUsername, and startPassword from within neo4jConnection.js.
