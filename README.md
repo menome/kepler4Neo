@@ -22,6 +22,7 @@ Send a cypher query to your current Neo4J database
 2. Retrieve a [Mapbox API token](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
 3. Create a .env file within the main directory of your kepler4Neo project.
 4. Insert your mapbox API token into your .env file using the name REACT_APP_MAPBOX_API_TOKEN.
+
 `REACT_APP_MAPBOX_API_TOKEN=<YourToken>`
 5. To launch kepler4Neo, navigate to the kepler4Neo folder and type `npm start` with a command terminal.
 
