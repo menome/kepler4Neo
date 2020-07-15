@@ -1,5 +1,4 @@
 import React from "react";
-import MDIcon from "./MDIcon";
 
 function SelectMultiple(props) {
     // Assume we have props.values and props.setValues()
@@ -68,6 +67,3 @@ function SelectMultiple(props) {
 }
 
 export default SelectMultiple
-
-/*<MDIcon icon="add_circle"></MDIcon>*/
-/*<MDIcon icon="delete"></MDIcon>*/
