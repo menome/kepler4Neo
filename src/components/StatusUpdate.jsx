@@ -28,12 +28,18 @@ function StatusUpdate(props) {
 
     function getStatusMessage() {
         switch (props.code) {
+            // Cases for database login
             case "Neo.ClientError.Security.Unauthorized":
-                return "Authentication failed. Ensure URI, username, and password are correct.";
+                return "Authentication failed. Ensure URL, username, and password are correct.";
             case "ServiceUnavailable":
-                return "Could not connect to database at given URI. Ensure URI is correct.";
+                return "Could not connect to database at given URL. Ensure URL is correct.";
+            case 12:
+                return "Could not connect to database at given URL. Ensure URL is correct.";
+            case "Unknown scheme: null":
+                return "Invalid URL. Ensure you are using a valid Bolt URL.";
             case "login":
                 return "Successfully logged in to database.";
+            // Cases for query submit
             case "blankQuery":
                 return "Could not process query - no cypher query recieved.";
             case "blankId":

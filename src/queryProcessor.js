@@ -1,5 +1,10 @@
 import submitQuery from "./neo4jConnection";
 
+/**
+ * A function which manages the calling of a query to the connected Neo4J database.
+ * Throws an error if something wrong occurs.
+ * @param {*} input - An object w/ the content of the user input, which is used to perform query.
+ */
 async function processQuery(input) {
 
     let dataTypes = input.dataTypes;
@@ -9,7 +14,7 @@ async function processQuery(input) {
 
     validateInput(query, id, name, dataTypes);
 
-    let dataFields = await generateDataFields(dataTypes);
+    let dataFields = generateDataFields(dataTypes);
 
     return submitQuery(query, dataFields).then(queryResult => {
         if (!queryResult) {
@@ -29,8 +34,10 @@ async function processQuery(input) {
 
 }
 
-//Populates data fields array.
-//TODO: Specify standard format for Date and Timestamp data?
+/**
+ * Based on the data types specified by the user, creates a dataFields array
+ of objects, which will be used by the record parser to understand what kind of data
+ it is expecting to recieve from Neo4J. */
 function generateDataFields(dataTypes) {
     let dataFields = [];
     for (let i = 0; i < dataTypes.length; i++)
@@ -38,6 +45,13 @@ function generateDataFields(dataTypes) {
     return dataFields;
 }
 
+/**
+ * Checks to make sure the input for the query request isn't empty. Throws errors if it is.
+ * @param { string } query 
+ * @param { string } id 
+ * @param { string } name 
+ * @param { string[] } dataTypes 
+ */
 function validateInput(query, id, name, dataTypes) {
     if (!query) {
         throw new Error("blankQuery");
@@ -62,12 +76,3 @@ function validateInput(query, id, name, dataTypes) {
 
 
 export default processQuery;
-
-
-
-/**
- * Logs into the database, returning an object that represents what type of 
- * @param {string} route - The URI route of the database to connect to
- * @param {string} username - The username to connect with 
- * @param {string} password - the password to connect with
- */
