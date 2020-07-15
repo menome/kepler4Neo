@@ -57,6 +57,7 @@ The cypher for our query is
 `MATCH (v:Visit)-[:LOCATED_AT]->(l:Place) RETURN l.name AS name, l.homelocation.x AS latitude, l.homelocation.y AS longitude, v.starttime AS startime`
 
 Once you click submit, the data should upload to your map automatically. From here, you can use kepler.gl to create dynamic data visualizations.
+
 ![The data uploaded to kepler.gl](https://snipboard.io/Oond46.jpg)
 
 
@@ -65,7 +66,7 @@ Once you click submit, the data should upload to your map automatically. From he
 Your data from Neo4J should be formatted according to [kepler.gl specifications](https://docs.kepler.gl/docs/user-guides/b-kepler-gl-workflow/a-add-data-to-the-map).
 Ensure that your returned data matches the data types available from the drop-down menu (Real Number, Date, Integer, String, GeoJSON, or Timestamp). If it doesn't, you can use Neo4J functions within your query to ensure your data is in an appropriate format.
 
-In order to use kepler.gl's time playback feature, your temporal data must be formatted as a timestamp (dates without times cannot use time playback in the current version of kepler.gl). You can use [kepler's temporal functions](https://neo4j.com/docs/cypher-manual/current/functions/temporal/) to accomplish this. For example, to convert a date into a datetime, the following query can be used:
+In order to use kepler.gl's time playback feature, your temporal data must be formatted as a timestamp (dates without times cannot use time playback in the current version of kepler.gl). You can use [kepler's temporal functions](https://neo4j.com/docs/cypher-manual/current/functions/temporal/) to accomplish this. For example, to convert a date into a datetime, the following function can be used:
 
 `WITH date({year:1984, month:10, day:11}) AS dd
 RETURN datetime({date:dd, hour: 0, minute: 0, second: 0}) AS myDateTime`
