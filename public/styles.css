@@ -29,6 +29,16 @@ body{
     letter-spacing: 1.05px;
 }
 
+.neoInputArea button:focus{
+    outline: 0;
+    border: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.neoInputArea button{
+    cursor: pointer;
+}
+
 /*** Display Buttons (Switch from db connect to query input) ****/
 
 .neoInputArea .displaySlider{
@@ -49,10 +59,8 @@ body{
     background-color: #99A0AC;
 }
 
-.neoInputArea .displaySlider button:focus, .neoInputArea .displaySlider button:visited{
+.neoInputArea .displaySlider button[data-selected='true']{
     background-color: #3A4552;
-    border: 0px;
-    outline: 0px;
 }
 
 /***** Submit Button ********/
@@ -84,14 +92,8 @@ body{
     padding: 0px 10px 10px 10px;
 }
 
-.neoInputArea .longTextInput{
-    float: right;
-}
-
 .neoInputArea input[type="text"], .neoInputArea textarea{
     border-style: solid;
-    /*border: 1px solid #cccccc;
-    background: #29323C;*/
     background-color: #29323C;
     border: 1px solid #29323C;
     border-radius: 2px;
@@ -103,6 +105,31 @@ body{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
     width: 100%;
+}
+
+.neoInputArea .shortTextInput label, .neoInputArea .longTextInput label
+ {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+.neoInputArea .shortTextInput label::before, .neoInputArea .longTextInput label::before  {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -20px;
+    transition: 0.5s;
+}
+
+.neoInputArea .shortTextInput:hover label, .neoInputArea .longTextInput:hover label {
+    /*padding-left: 25px; */
+}
+
+.neoInputArea .shortTextInput:hover label::before, .neoInputArea .longTextInput:hover label::before  {
+    opacity: 1;
+    right: 0;
 }
 
 /******* Select Data Dropdown *************/
@@ -188,7 +215,7 @@ body{
     grid-column: 1 / -1;
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width: 915px){
 
     .neoInputArea .neoInputUI{
         grid-template-columns: repeat(6, 1fr);
@@ -217,35 +244,40 @@ body{
     display: grid;
     grid-gap: 3px;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto auto 55px;
+    grid-template-rows: auto auto 75px;
     grid-template-areas: 
-    ". . . i i l l l l . . ."
+    ". . . i i i l l l . . ."
     ". . m m m m m m m m . ."
     ". . . c c c c c c . . .";
 }
 
 .neoInputArea .db-UI .db-img{
     grid-area: i;
-    justify-self: center;
+    justify-self: end;
     align-self: center;
+}
 
-    font-size: 4rem;
+.neoInputArea .db-icon-img{
+    width: 125px;
+    padding-right: 30px;
 }
 .neoInputArea .db-UI .db-login{
     grid-area: l;
+    justify-self: start;
 }
 .neoInputArea .db-UI .db-connect{
-    align-self: end;
+    align-self: center;
     grid-area: c;
 }
 .neoInputArea .db-UI .db-msg{
     grid-area: m;
 }
 
-@media screen and (max-width:850px){
+@media screen and (max-width:600px){
 
     .neoInputArea .db-UI .db-login{
         grid-column: 4 / 10;
+        justify-self: center;
     }
 
     .neoInputArea .db-UI .db-img{
@@ -253,13 +285,14 @@ body{
     }
 }
 
-/******* Status Update (Login) **********/
+/******* Status Update (Login/Errors) **********/
 
 
 .neoInputArea .statusUpdateSuccess{
     margin: 10px auto 0;
     border-radius: 10px;
-    width: 700px;
+    max-width: 700px;
+    width: auto;
     padding: 10px;
 
     background-color: #0F9668;
@@ -269,7 +302,8 @@ body{
 .neoInputArea .statusUpdateError{
     margin: 10px auto 10px;
     border-radius: 10px;
-    width: 700px;
+    max-width: 700px;
+    width: auto;
     padding: 10px;
 
     background-color: #A4231C;
@@ -289,6 +323,10 @@ body{
     background-color: transparent;
     color: #ffffff;
     
+    position: relative;
+    top: -5px;
+    right: -5px;
+
     border: 0;
     font-size: 0.4rem;
     margin: 0 0.3rem;

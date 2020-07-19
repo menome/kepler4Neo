@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function LongTextInput(props){
+function LongTextInput(props) {
 
     let id = props.id;
     let value = props.value;
@@ -9,16 +9,17 @@ function LongTextInput(props){
     let labelName = props.labelName;
 
     return (<div className="longTextInput">
-    <label htmlFor={id}>
-        {labelName}
-        <textarea 
-        id={id} 
-        className="neoQuery" 
-        rows ="4"
-        cols="50"
-        value={value} 
-        onChange={onChange} />
-    </label>
+        <label htmlFor={id}>
+            {labelName}
+        </label>
+        <textarea
+            id={id}
+            className="neoQuery"
+            rows="4"
+            cols="50"
+            value={value}
+            onChange={onChange} 
+        />
     </div>);
 }
 
