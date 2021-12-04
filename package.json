@@ -1,7 +1,9 @@
 {
-  "name": "my-app",
+  "name": "kepler4neo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "KeplerGL with neo4j connector - created by menome technologies, maintained by Arcurve",
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
